@@ -15,7 +15,7 @@ class SettingController extends BaseController {
      */
     public function index() {
         $this->setPageTitle('Settings', 'Manage Settings');
-        return view('pages.backend.settings');
+        return view('pages.backend.settings.index');
     }
 
     /**
