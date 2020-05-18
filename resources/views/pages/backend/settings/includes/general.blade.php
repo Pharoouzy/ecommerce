@@ -51,18 +51,20 @@
             <div class="form-row">
                 <div class="col form-group">
                     <label class="control-label" for="currency_code">Currency Code</label>
-                    <input
-                        class="form-control @error('currency_code') is-invalid @enderror"
-                        type="text"
-                        name="currency_code"
-                        id="currency_code"
-                        max="3" min="3"
-                        maxlength="3"
-                        minlength="3"
-                        required
-                        placeholder="Enter Currency Code"
-                        value="{{ config('settings.currency_code') }}"
-                    >
+                    <select name="currency_code" class="form-control" id="currency_code">
+                    </select>
+{{--                    <input--}}
+{{--                        class="form-control @error('currency_code') is-invalid @enderror"--}}
+{{--                        type="text"--}}
+{{--                        name="currency_code"--}}
+{{--                        id="currency_code"--}}
+{{--                        max="3" min="3"--}}
+{{--                        maxlength="3"--}}
+{{--                        minlength="3"--}}
+{{--                        required--}}
+{{--                        placeholder="Enter Currency Code"--}}
+{{--                        value="{{ config('settings.currency_code') }}"--}}
+{{--                    >--}}
                     @error('currency_code')
                     <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
                     @enderror
@@ -78,6 +80,7 @@
                         maxlength="1"
                         minlength="1"
                         required
+                        readonly
                         placeholder="Enter default email address"
                         value="{{ config('settings.currency_symbol') }}"
                     >
@@ -99,3 +102,31 @@
         </div>
     </form>
 </div>
+@section('javascript')
+    <script>
+        let currencyCode = $('#currency_code');
+        let currencyText = '';
+        let currencySymbol = $('#currency_symbol');
+        let configValue = "{{ config('settings.currency_code') }}";
+        currencyCode.empty();
+        currencyCode.append('<option selected="true" disabled>Choose Currency Code</option>');
+        currencyCode.prop('selectedIndex', 0);
+        const url = "{{ asset('backend/js/currency-code.json') }}";
+        // Populate dropdown with list of provinces
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, entry) {
+                currencyCode.append($('<option></option>')
+                    .attr('value', entry.code)
+                    .attr(((key === configValue) ? 'selected' : 'unselected'), 'selected')
+                    .text(`${entry.name_plural} [${entry.code}]`));
+            })
+        });
+
+        $('#currency_code').change(function () {
+            currencyText = $(this).val();
+            $.getJSON(url, function (data) {
+                currencySymbol.val(data[currencyText]['symbol']);
+            });
+        });
+    </script>
+@endsection

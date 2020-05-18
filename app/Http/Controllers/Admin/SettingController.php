@@ -54,6 +54,8 @@ class SettingController extends BaseController {
             'paystack_redirect_url' => 'sometimes|url',
         ]);
 
+
+
         if ($request->has('site_logo') && ($request->file('site_logo') instanceof UploadedFile)) {
 
             if (config('settings.site_logo') != null) {
