@@ -16,4 +16,10 @@ class Category extends Model {
         'featured'  =>  'boolean',
         'menu'      =>  'boolean'
     ];
+
+    // mutator
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = str_slug($value);
+    }
 }
