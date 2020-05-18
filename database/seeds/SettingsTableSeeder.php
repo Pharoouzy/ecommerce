@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
 class SettingsTableSeeder extends Seeder {
@@ -74,27 +75,31 @@ class SettingsTableSeeder extends Seeder {
         ],
         [
             'key' =>  'stripe_payment_method',
-            'value' =>  '',
+            'value' =>  '0',
         ],
         [
             'key' =>  'stripe_key',
-            'value' =>  '',
+            'value' =>  '45cc8974bc249bba332fsaeo2r41a722193s63e8',
         ],
         [
             'key' =>  'stripe_secret_key',
-            'value' =>  '',
+            'value' =>  '67cc8974bc249bba332fsaeo2r41l722193s63e5',
         ],
         [
             'key' =>  'paystack_payment_method',
-            'value' =>  '',
+            'value' =>  '1',
         ],
         [
             'key' =>  'paystack_public_key',
-            'value' =>  '',
+            'value' =>  'pk_test_67cc8974bc249bba332fsaeo2r41l722193s63e5',
         ],
         [
             'key' =>  'paystack_secret_key',
-            'value' =>  '',
+            'value' =>  'sk_test_67cc8974bc249bba332fsaeo2r41l722193s63e5',
+        ],
+        [
+            'key' =>  'paystack_redirect_url',
+            'value' =>  'http://ecommerce.io/paystack-redirect',
         ],
     ];
 

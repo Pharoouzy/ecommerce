@@ -3,6 +3,7 @@
     $messages = Session::get('success');
     $info = Session::get('info');
     $warnings = Session::get('warning');
+    $validation_error = Session::get('errors');
 @endphp
 @if ($errors)
     @foreach($errors as $key => $value)
@@ -11,6 +12,16 @@
             <strong>Error!</strong> {{ $value }}
         </div>
     @endforeach
+@endif
+
+@if($validation_error)
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button class="close" type="button" data-dismiss="alert">×</button>
+        <strong>Validation Errors!</strong>
+        @foreach($validation_error->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </div>
 @endif
 
 @if ($messages)

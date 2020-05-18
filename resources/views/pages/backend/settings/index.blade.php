@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title') Dashboard @endsection
+@section('title') {{ $pageTitle }} @endsection
 
 @section('bars')
     @include('partials.backend._header')
@@ -20,65 +20,39 @@
                 <li class="breadcrumb-item active"><a href="#">Settings</a></li>
             </ul>
         </div>
+        @include('partials.backend._flash')
         <div class="row">
             <div class="col-md-3">
-                <div class="tile">
-                    <div class="tile-body">
-                        <ul>
-                            <li>Settings</li>
-                        </ul>
-                    </div>
+                <div class="tile p-0">
+                    <ul class="nav flex-column nav-tabs user-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#site-logo" data-toggle="tab">Site Logo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer-seo" data-toggle="tab">Footer &amp; SEO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#social-links" data-toggle="tab">Social Links</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#analytics" data-toggle="tab">Analytics</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#payments" data-toggle="tab">Payments</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="tile">
-                    <h3 class="tile-title">General Setting</h3>
-                    <div class="tile-body">
-                        <div>
-                            @csrf
-                            <div class="form-group">
-                                <label class="control-label">Site Name</label>
-                                <input class="form-control @error('site_name') is-invalid @enderror" type="text" placeholder="Enter site name" name="site_name" required autofocus>
-                                @error('site_name')
-                                <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Site Title</label>
-                                <input class="form-control @error('site_title') is-invalid @enderror" name="site_title" type="text" placeholder="Enter site title">
-                                @error('site_title')
-                                <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Default Email Address</label>
-                                <input class="form-control @error('default_email_address') is-invalid @enderror" type="email" name="default_email_address" placeholder="Enter default email address">
-                                @error('default_email_address')
-                                <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                @enderror
-                            </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label class="control-label">Currency Code</label>
-                                    <input class="form-control @error('currency_code') is-invalid @enderror" type="text" name="currency_code" max="3" min="3" placeholder="Enter Currency">
-                                    @error('currency_code')
-                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                    @enderror
-                                </div>
-                                <div class="col form-group">
-                                    <label class="control-label">Currency Symbol</label>
-                                    <input class="form-control @error('currency_symbol') is-invalid @enderror" name="currency_symbol" type="text" max="1"  min="1" placeholder="Enter default email address">
-                                    @error('currency_symbol')
-                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                    @enderror
-                                </div>
-                            </div>
-                        </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="general">
+                        @include('pages.backend.settings.includes.general')
                     </div>
-                    <div class="tile-footer text-right">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Settings</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                    <div class="tab-pane fade" id="site-logo">
+                        @include('pages.backend.settings.includes.logo')
+                    </div>
+                    <div class="tab-pane fade" id="footer-seo">
+                        @include('pages.backend.settings.includes.footer_seo')
+                    </div>
+                    <div class="tab-pane fade" id="social-links">
+                        @include('pages.backend.settings.includes.social_links')
+                    </div>
+                    <div class="tab-pane fade" id="analytics">
+                        @include('pages.backend.settings.includes.analytics')
+                    </div>
+                    <div class="tab-pane fade" id="payments">
+                        @include('pages.backend.settings.includes.payments')
                     </div>
                 </div>
             </div>
