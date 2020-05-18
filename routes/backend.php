@@ -8,6 +8,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth\Admin'], function () {
 
 });
 
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function () {
 
     Route::get('/dashboard', function () {
@@ -20,4 +21,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:admin', 'namespace' => '
 
     Route::get('/settings', 'SettingController@index')->name('admin.settings');
     Route::post('/settings', 'SettingController@update')->name('admin.settings.update');
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', 'CategoryController@index')->name('admin.categories.index');
+        Route::get('/create', 'CategoryController@create')->name('admin.categories.create');
+        Route::post('/store', 'CategoryController@store')->name('admin.categories.store');
+        Route::get('/{id}/edit', 'CategoryController@edit')->name('admin.categories.edit');
+        Route::post('/update', 'CategoryController@update')->name('admin.categories.update');
+        Route::get('/{id}/delete', 'CategoryController@delete')->name('admin.categories.delete');
+    });
 });
