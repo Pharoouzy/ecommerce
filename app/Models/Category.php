@@ -22,4 +22,12 @@ class Category extends Model {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = str_slug($value);
     }
+
+    public function parent() {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children() {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 }
