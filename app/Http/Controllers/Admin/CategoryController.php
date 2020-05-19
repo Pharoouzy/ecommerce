@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Contracts\CategoryContract;
 use App\Http\Controllers\BaseController;
 
 /**
@@ -10,13 +11,30 @@ use App\Http\Controllers\BaseController;
  * @package App\Http\Controllers\Admin
  */
 class CategoryController extends BaseController {
+
+    /**
+     * @var CategoryContract
+     */
+    protected $categoryRepository;
+
+    /**
+     * CategoryController constructor.
+     * @param CategoryContract $categoryRepository
+     */
+    public function __construct(CategoryContract $categoryRepository) {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        $categories = $this->categoryRepository->listCategories();
+
+        $this->setPageTitle('Categories', 'List of all categories');
+        return view('pages.backend.categories.index', compact('categories'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model {
@@ -20,7 +21,7 @@ class Category extends Model {
     // mutator
     public function setNameAttribute($value) {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = str_slug($value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 
     public function parent() {
