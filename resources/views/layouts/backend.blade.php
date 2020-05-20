@@ -26,7 +26,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="{{ asset('backend/images/favicon/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ asset('storage/'.config('settings.site_favicon')) }}" rel="shortcut icon" type="image/x-icon">
     <!-- Scripts -->
 
     <!-- Styles -->
@@ -37,7 +37,7 @@
     @yield('bars')
 
     @yield('content')
-    
+
     @include('partials.backend._footer')
     @include('partials.backend._javascript')
     @yield('javascript')

@@ -4,8 +4,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-2 col-4">
                     <a href="{{ url('/') }}" class="brand-wrap">
-                        {{-- <img class="logo" src="{{ asset('frontend/images/logo.png') }}"> --}}
-                        <h3>E-Commerce</h3>
+                         <img class="logo" src="{{ asset('storage/'.config('settings.site_logo')) }}">
+{{--                        <h3>E-Commerce</h3>--}}
                     </a> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-lg-7 col-sm-12">
@@ -17,7 +17,7 @@
                                     <option value="content">Latest</option>
                             </select>
                             <input type="text" class="form-control" placeholder="Search">
-                            
+
                             <div class="input-group-append">
                               <button class="btn btn-primary" type="submit">
                                 <i class="fa fa-search"></i> Search
@@ -38,7 +38,7 @@
                                 <a href="{{ url('dashboard') }}" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                                 <div class="text">
                                     <span class="text-muted">Welcome {{ auth()->user()->first_name }}!</span>
-                                    <div> 
+                                    <div>
                                         <a href="{{ url('dashboard') }}">Dashboard</a>
                                     </div>
                                 </div>
@@ -46,9 +46,9 @@
                                 <a href="{{ url('login') }}" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                                 <div class="text">
                                     <span class="text-muted">Welcome {{ __('Guest') }}!</span>
-                                    <div> 
+                                    <div>
                                         <a href="{{ route('login') }}">Sign in</a>
-                                        @if (Route::has('register')) |  
+                                        @if (Route::has('register')) |
                                         <a href="{{ route('register') }}"> Register</a>
                                         @endif
                                     </div>

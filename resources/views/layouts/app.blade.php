@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') - {{config('app.name')}}</title>
-    <link href="{{ asset('frontend/images/favicon/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ asset('storage/'.config('settings.site_favicon')) }}" rel="shortcut icon" type="image/x-icon">
     <!-- Scripts -->
 
     <!-- Styles -->
@@ -23,7 +23,7 @@
         @yield('navbar')
 
         @yield('content')
-    
+
     </div>
     @include('partials.frontend._footer')
     @include('partials.frontend._javascript')
