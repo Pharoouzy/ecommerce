@@ -128,12 +128,19 @@ class CategoryController extends BaseController {
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from DB.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        //
+    public function delete($id) {
+        $id = decrypt($id);
+
+        $category = $this->categoryRepository->deleteCategory($id);
+
+        if (!$category) {
+            return $this->responseRedirectBack('Error occurred while deleting category.', 'error', true, true);
+        }
+        return $this->responseRedirect('admin.categories.index', 'Category deleted successfully' ,'success',false, false);
     }
 }
