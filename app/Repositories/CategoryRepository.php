@@ -91,6 +91,7 @@
             $category = $this->findCategoryById($data['id']);
 
             $collection = collect($data)->except('_token');
+            $image = null;
 
             if ($collection->has('image') && ($data['image'] instanceof  UploadedFile)) {
 

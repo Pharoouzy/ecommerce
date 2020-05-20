@@ -43,18 +43,36 @@ class CategoryController extends BaseController {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        $categories = $this->categoryRepository->listCategories('id', 'asc');
+
+        $this->setPageTitle('Categories', 'Create Category');
+        return view('pages.backend.categories.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+
+        $this->validate($request, [
+            'name'      =>  'required|max:191',
+            'parent_id' =>  'required|not_in:0|exists:categories,id',
+            'image'     =>  'sometimes|mimes:jpg,jpeg,png|max:1000'
+        ]);
+
+        $data = $request->except('_token');
+
+        $category = $this->categoryRepository->createCategory($data);
+
+        if (!$category) {
+            return $this->responseRedirectBack('Error occurred while creating category.', 'error', true, true);
+        }
+
+        return $this->responseRedirect('admin.categories.index', 'Category added successfully' ,'success',false, false);
     }
 
     /**
@@ -63,8 +81,7 @@ class CategoryController extends BaseController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -74,20 +91,40 @@ class CategoryController extends BaseController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        $id = decrypt($id);
+        $category = $this->categoryRepository->findCategoryById($id);
+        $categories = $this->categoryRepository->listCategories();
+
+        $this->setPageTitle('Categories', 'Edit Category : '.$category->name);
+        return view('pages.backend.categories.edit', compact('categories', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request) {
+
+        $this->validate($request, [
+            'name'      =>  'required|max:191',
+            'parent_id' =>  'required|not_in:0|exists:categories,id',
+            'image'     =>  'sometimes|mimes:jpg,jpeg,png|max:1000'
+        ]);
+
+        $data = $request->except('_token');
+
+        $category = $this->categoryRepository->updateCategory($data);
+
+        if (!$category) {
+            return $this->responseRedirectBack('Error occurred while updating category.', 'error', true, true);
+        }
+
+        return $this->responseRedirectBack('Category updated successfully' ,'success',false, false);
     }
 
     /**
