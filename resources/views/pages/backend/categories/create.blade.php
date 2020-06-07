@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group dropzones">
-                                    <label class="control-label">Category Image</label>
+                                    <label class="control-label">Caashtegory Image</label>
                                     <div class="fallback">
                                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                         @error('image')
