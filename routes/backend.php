@@ -30,4 +30,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:admin', 'namespace' => '
         Route::post('/update', 'CategoryController@update')->name('admin.categories.update');
         Route::get('/{id}/delete', 'CategoryController@delete')->name('admin.categories.delete');
     });
+
+    Route::group(['prefix' => 'attributes'], function () {
+        Route::get('/', 'CategoryController@index')->name('admin.attributes.index');
+        Route::get('/create', 'CategoryController@create')->name('admin.attributes.create');
+        Route::post('/store', 'CategoryController@store')->name('admin.attributes.store');
+        Route::get('/{id}/edit', 'CategoryController@edit')->name('admin.attributes.edit');
+        Route::post('/update', 'CategoryController@update')->name('admin.attributes.update');
+        Route::get('/{id}/delete', 'CategoryController@delete')->name('admin.attributes.delete');
+    });
 });
