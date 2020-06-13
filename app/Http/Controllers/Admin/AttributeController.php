@@ -12,5 +12,9 @@ use App\Http\Controllers\BaseController;
  */
 class AttributeController extends BaseController
 {
-    //
+    protected $attributeRepository;
+
+    public function __construct(AttributeContract $attributeRepository) {
+        $this->attributeRepository = $attributeRepository;
+    }
 }
