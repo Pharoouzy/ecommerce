@@ -35,9 +35,9 @@
 </head>
 <body class="app sidebar-mini">
     @yield('bars')
-
-    @yield('content')
-
+    <div id="app">
+        @yield('content')
+    </div>
     @include('partials.backend._footer')
     @include('partials.backend._javascript')
     @yield('javascript')
