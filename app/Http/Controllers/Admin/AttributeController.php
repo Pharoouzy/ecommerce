@@ -45,6 +45,11 @@ class AttributeController extends BaseController
         return view('pages.backend.attributes.create');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store(Request $request) {
         $this->validate($request, [
             'code' => 'required',
@@ -61,5 +66,17 @@ class AttributeController extends BaseController
         }
 
         return $this->responseRedirect('admin.attributes.index', 'Attribute added successfully' ,'success',false, false);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id) {
+        $attribute = $this->attributeRepository->findAttributeById(decrypt($id));
+
+        $this->setPageTitle('Attributes', 'Edit Attribute : '.$attribute->name);
+
+        return view('pages.backend.attributes.edit', compact('attribute'));
     }
 }
