@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="values">
-                        <h3>Option Values</h3>
+                        <AttributeValues :attributeid="{{ $attribute->id }}"></AttributeValues>
                     </div>
                 </div>
             </div>
