@@ -44,4 +44,22 @@ class AttributeController extends BaseController
 
         return view('pages.backend.attributes.create');
     }
+
+    public function store(Request $request) {
+        $this->validate($request, [
+            'code' => 'required',
+            'name' => 'required',
+            'frontend_type' => 'required'
+        ]);
+
+        $params = $request->except('_token');
+
+        $attribute = $this->attributeRepository->createAttribute($params);
+
+        if (!$attribute) {
+            return $this->responseRedirectBack('Error occurred while creating attribute.', 'error', true, true);
+        }
+
+        return $this->responseRedirect('admin.attributes.index', 'Attribute added successfully' ,'success',false, false);
+    }
 }
