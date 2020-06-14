@@ -79,4 +79,27 @@ class AttributeController extends BaseController
 
         return view('pages.backend.attributes.edit', compact('attribute'));
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function update(Request $request) {
+        $this->validate($request, [
+            'code' => 'required',
+            'name' => 'required',
+            'frontend_type' => 'required'
+        ]);
+
+        $data = $request->except('_token');
+
+        $attribute = $this->attributeRepository->updateAttribute($data);
+
+        if (!$attribute) {
+            return $this->responseRedirectBack('Error occurred while updating attribute.', 'error', true, true);
+        }
+
+        return $this->responseRedirectBack('Attribute updated successfully' ,'success',false, false);
+    }
 }
