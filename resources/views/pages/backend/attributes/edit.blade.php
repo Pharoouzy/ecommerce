@@ -27,6 +27,7 @@
                 <div class="tile p-0">
                     <ul class="nav flex-column nav-tabs user-tabs">
                         <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#values" data-toggle="tab">Attribute Values</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,6 +106,9 @@
                             </form>
                         </div>
                     </div>
+                    <div class="tab-pane" id="values">
+                        <h3>Option Values</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,4 +117,5 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dropzone.js') }}"></script>
+    <script src="{{ asset('backend/js/app.js') }}"></script>
 @endsection
