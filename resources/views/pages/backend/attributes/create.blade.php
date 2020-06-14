@@ -17,79 +17,84 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">Categories</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.attributes.index') }}">Categories</a></li>
                 <li class="breadcrumb-item active"><a href="#">Create New Category</a></li>
             </ul>
         </div>
         @include('partials.backend._flash')
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-                <div class="tile">
-                    <div class="container">
-                        <h3 class="tile-title">{{ $subTitle }}</h3>
-                        <form action="{{ route('admin.categories.store') }}" method="POST" role="form" enctype="multipart/form-data">
-                            @csrf
-                            <div class="tile-body">
-                                <div class="form-group">
-                                    <label class="control-label" for="name">Name <span class="m-l-5 text-danger"> *</span></label>
-                                    <input
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        required
-                                        value="{{ old('name') }}"
-                                    >
-                                    @error('name')
-                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="description">Description</label>
-                                    <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="parent">Parent Category <span class="m-l-5 text-danger"> *</span></label>
-                                    <select id=parent class="form-control custom-select mt-15 @error('parent_id') is-invalid @enderror" name="parent_id" required>
-                                        <option value="0">Select a parent category</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
-                                        @endforeach
-                                    </select>
-                                    @error('parent_id') <small class="form-text text-danger"><strong>{{ $message }}</strong></small> @enderror
-                                </div>
-                                <div class="form-group">
-                                    <div class="toggle">
-                                        <label class="form-check-label">
-                                            <input class="button-indecator" type="checkbox" id="featured" name="featured" value="1">
-                                            <span class="button-indecator"> Featured Category</span>
-                                        </label>
+        <div class="row user">
+            <div class="col-md-3">
+                <div class="tile p-0">
+                    <ul class="nav flex-column nav-tabs user-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="general">
+                        <div class="tile">
+                            <form action="{{ route('admin.attributes.store') }}" method="POST" role="form">
+                                @csrf
+                                <h3 class="tile-title">Attribute Information</h3>
+                                <hr>
+                                <div class="tile-body">
+                                    <div class="form-group">
+                                        <label class="control-label" for="code">Code</label>
+                                        <input
+                                            class="form-control"
+                                            type="text"
+                                            placeholder="Enter attribute code"
+                                            id="code"
+                                            name="code"
+                                            value="{{ old('code') }}"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Name</label>
+                                        <input
+                                            class="form-control"
+                                            type="text"
+                                            placeholder="Enter attribute name"
+                                            id="name"
+                                            name="name"
+                                            value="{{ old('name') }}"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="frontend_type">Frontend Type</label>
+                                        @php $types = ['select' => 'Select Box', 'radio' => 'Radio Button', 'text' => 'Text Field', 'text_area' => 'Text Area']; @endphp
+                                        <select name="frontend_type" id="frontend_type" class="form-control">
+                                            @foreach($types as $key => $label)
+                                                <option value="{{ $key }}">{{ $label }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" id="is_filterable" name="is_filterable"/>Filterable
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" id="is_required" name="is_required"/>Required
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="toggle">
-                                        <label class="form-check-label">
-                                            <input class="button-indecator" type="checkbox" id="menu" name="menu" value="1">
-                                            <span class="button-indecator"> Show in Menu</span>
-                                        </label>
+                                <div class="tile-footer">
+                                    <div class="row d-print-none mt-2">
+                                        <div class="col-12 text-right">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Attribute</button>
+                                            <a class="btn btn-danger" href="{{ route('admin.attributes.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Go Back</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group dropzones">
-                                    <label class="control-label">Caashtegory Image</label>
-                                    <div class="fallback">
-                                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
-                                        @error('image')
-                                        <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile-footer text-right">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Category</button>
-                                &nbsp;&nbsp;&nbsp;
-                                <a class="btn btn-secondary" href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

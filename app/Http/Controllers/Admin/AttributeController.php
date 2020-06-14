@@ -35,4 +35,13 @@ class AttributeController extends BaseController
 
         return view('pages.backend.attributes.index', compact('attributes'));
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create() {
+        $this->setPageTitle('Attributes', 'Create Attribute');
+
+        return view('pages.backend.attributes.create');
+    }
 }
