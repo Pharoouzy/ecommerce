@@ -102,4 +102,14 @@ class AttributeController extends BaseController
 
         return $this->responseRedirectBack('Attribute updated successfully' ,'success',false, false);
     }
+
+    public function delete($id) {
+        $attribute = $this->attributeRepository->deleteAttribute(decrypt($id));
+
+        if (!$attribute) {
+            return $this->responseRedirectBack('Error occurred while deleting attribute.', 'error', true, true);
+        }
+
+        return $this->responseRedirect('admin.attributes.index', 'Attribute deleted successfully' ,'success',false, false);
+    }
 }

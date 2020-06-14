@@ -17,8 +17,8 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">Categories</a></li>
-                <li class="breadcrumb-item active"><a href="#">Edit Category</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.attributes.index') }}">Attributes</a></li>
+                <li class="breadcrumb-item active"><a href="#">Edit Attribute</a></li>
             </ul>
         </div>
         @include('partials.backend._flash')
