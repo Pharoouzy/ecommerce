@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "AttributeValues",
+        name: "attribute-values",
         props: ['attributeid'],
     }
 </script>

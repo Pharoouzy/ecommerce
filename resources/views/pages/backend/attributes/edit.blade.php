@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="values">
-                        <AttributeValues :attributeid="{{ $attribute->id }}"></AttributeValues>
+                        <attribute-values :attributeid="{{ $attribute->id }}"></attribute-values>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,6 @@
     </main>
 @endsection
 
-@section('javascript')
-    <script type="text/javascript" src="{{ asset('backend/js/plugins/dropzone.js') }}"></script>
+@push('javascript')
     <script src="{{ asset('backend/js/app.js') }}"></script>
-@endsection
+@endpush
