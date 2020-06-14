@@ -32,6 +32,7 @@ class AttributeController extends BaseController
         $attributes = $this->attributeRepository->listAttributes();
 
         $this->setPageTitle('Attributes', 'List of all attributes');
-        return view('admin.attributes.index', compact('attributes'));
+
+        return view('pages.backend.attributes.index', compact('attributes'));
     }
 }

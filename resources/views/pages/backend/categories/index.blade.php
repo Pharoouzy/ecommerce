@@ -34,13 +34,13 @@
                         <table class="table table-hover table-bordered" id="categoriesTable">
                             <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Name </th>
-                                <th> Slug </th>
-                                <th class="text-center"> Parent </th>
-                                <th class="text-center"> Featured </th>
-                                <th class="text-center"> Menu </th>
-                                <th class="text-center"> Order </th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th class="text-center">Parent</th>
+                                <th class="text-center">Featured</th>
+                                <th class="text-center">Menu </th>
+                                <th class="text-center">Order</th>
                                 <th style="width:100px; min-width:100px;" class="text-center text-danger"><i class="fa fa-bolt"> </i></th>
                             </tr>
                             </thead>
