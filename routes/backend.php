@@ -38,10 +38,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:admin', 'namespace' => '
         Route::get('/{id}/edit', 'AttributeController@edit')->name('admin.attributes.edit');
         Route::post('/update', 'AttributeController@update')->name('admin.attributes.update');
         Route::get('/{id}/delete', 'AttributeController@delete')->name('admin.attributes.delete');
-    });
 
-    Route::post('/get-values', 'AttributeValueController@getValues');
-    Route::post('/add-values', 'AttributeValueController@addValues');
-    Route::post('/update-values', 'AttributeValueController@updateValues');
-    Route::post('/delete-values', 'AttributeValueController@deleteValues');
+        Route::post('/get-values', 'AttributeValueController@getValues');
+        Route::post('/add-values', 'AttributeValueController@addValues');
+        Route::post('/update-values', 'AttributeValueController@updateValues');
+        Route::post('/delete-values', 'AttributeValueController@deleteValues');
+    });
 });
